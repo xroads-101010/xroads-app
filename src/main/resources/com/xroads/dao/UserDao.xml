@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xroads.dao.UserDao">
+
+  <select id="readUserByEmail" parameterType="String" resultMap="userMap">
+    SELECT
+      id,
+      email,
+      user_mobile,
+      user_name,
+      is_registered, 
+      created_at,
+      updated_at
+    FROM
+    `user` u 
+    WHERE u.email = #{email}
+  </select>
+
+  <resultMap id="userMap" type="User">
+    <id property="id" column="id" />
+    <result property="email" column="email" />
+    <result property="userMobile" column="user_mobile" />
+    <result property="userName" column="user_name" />
+    <result property="isRegistered" column="is_registered" />
+    <result property="createdAt" column="created_at"/>
+    <result property="updatedAt" column="updated_at"/>
+  </resultMap>
+
+ 
+
+</mapper>

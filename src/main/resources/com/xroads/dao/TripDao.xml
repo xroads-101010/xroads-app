@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xroads.dao.TripDao">
+
+  <select id="readTripById" parameterType="Integer" resultMap="tripMap">
+    SELECT
+      id,
+      trip_name,
+      trip_destination,
+      trip_champion,
+      has_trip_started, 
+      start_time,
+      end_time,
+      created_at,
+      updated_at
+    FROM
+    `trip` t
+    WHERE t.id = #{id}
+  </select>
+
+    <insert id="createTrip" parameterType="Trip" useGeneratedKeys="true"   >
+		INSERT 
+			INTO trip
+		SET 
+			id = #{id},
+			trip_name = #{tripName},
+            trip_destination = #{tripDestination},
+            trip_champion = #{tripChampion},
+            has_trip_started = #{hasTripStarted},
+            start_time = now(),
+            end_time = now(),
+            created_at = now(),
+            updated_at = now()
+			
+ 	</insert>  
+ 	
+ 	<update id="updateTripById" parameterType="Trip">
+		UPDATE 
+			trip t
+		SET 
+			 id = #{id}
+			<if test="tripName != null">
+				,trip_name = #{tripName}
+			</if>
+			<if test="tripDestination != null">
+				,trip_destination = #{tripDestination}
+			</if>
+			<if test="tripChampion != null">
+				,trip_champion = #{tripChampion}
+			</if>
+			<if test="hasTripStarted != null">
+				,has_trip_started = #{hasTripStarted}
+			</if>
+			<if test="startTime != null">
+				,start_time = #{startTime}
+			</if>	
+			<if test="endTime != null">
+				,end_time = #{endTime}
+			</if>	
+			<if test="createdAt != null">
+				,created_at = #{createdAt}
+			</if>	
+			<if test="updatedAt != null">
+				,updated_at = #{updatedAt}
+			</if>			
+		WHERE
+			t.id = #{id}
+ 	</update>   
+ 	
+  <resultMap id="tripMap" type="Trip">
+    <id property="id" column="id" />
+    <result property="tripName" column="trip_name" />
+    <result property="tripDestination" column="trip_destination" />
+    <result property="tripChampion" column="trip_champion" />
+    <result property="hasTripStarted" column="has_trip_started" />
+    <result property="startTime" column="start_time"/>
+    <result property="endTime" column="end_time"/>
+     <result property="createdAt" column="created_at"/>
+    <result property="updatedAt" column="updated_at"/>
+  </resultMap>
+ 
+
+</mapper>

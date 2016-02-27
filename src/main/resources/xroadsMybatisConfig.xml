@@ -21,15 +21,18 @@
   
   <typeAliases>
     <typeAlias alias="User" type="com.xroads.dao.entities.User" />
+    <typeAlias alias="Trip" type="com.xroads.dao.entities.Trip" />
     <package name="com.xroads.dao.entities" />
   </typeAliases>
 
+ 
   <typeHandlers>
     <typeHandler handler="com.xroads.dao.util.DateTimeTypeHandler" javaType="org.joda.time.DateTime"/>
   </typeHandlers>
 
   <mappers>
     <mapper class="com.xroads.dao.UserDao" />
+    <mapper class="com.xroads.dao.TripDao" />
   </mappers>
 
 </configuration>

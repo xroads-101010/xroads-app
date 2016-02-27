@@ -21,6 +21,8 @@
   
   <typeAliases>
     <typeAlias alias="User" type="com.xroads.dao.entities.User" />
+    <typeAlias alias="TripMemberLocation" type="com.xroads.dao.entities.TripMemberLocation" />
+    
     <package name="com.xroads.dao.entities" />
   </typeAliases>
 
@@ -30,6 +32,7 @@
 
   <mappers>
     <mapper class="com.xroads.dao.UserDao" />
+    <mapper class="com.xroads.dao.TripMemberLocationDao" />
   </mappers>
 
 </configuration>

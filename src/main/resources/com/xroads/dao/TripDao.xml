@@ -19,6 +19,22 @@
     `trip` t
     WHERE t.id = #{id}
   </select>
+  
+   <select id="readTripByChampion" parameterType="Integer" resultMap="tripMap" >
+      SELECT
+      id,
+      trip_name,
+      trip_destination,
+      trip_champion,
+      has_trip_started, 
+      start_time,
+      end_time,
+      created_at,
+      updated_at
+    FROM
+    `trip` t
+    WHERE t.trip_champion = #{tripChampion}       	
+    </select>
 
     <insert id="createTrip" parameterType="Trip" useGeneratedKeys="true"   >
 		INSERT 
@@ -40,9 +56,9 @@
 		UPDATE 
 			trip t
 		SET 
-			 id = #{id}
+			 
 			<if test="tripName != null">
-				,trip_name = #{tripName}
+				trip_name = #{tripName}
 			</if>
 			<if test="tripDestination != null">
 				,trip_destination = #{tripDestination}

@@ -1,5 +1,7 @@
 package com.xroads.resource;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 
 import com.xroads.dao.TripDao;
@@ -44,6 +47,14 @@ public class TripResource {
 		return Response.ok(trip).build();
 	}
 	
+	@GET @Path("{champion}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response getTripByChampion(@QueryParam("id") Integer tripChampion){
+		List<Trip> trips = tripDao.readTripByChampion(tripChampion);
+		return Response.ok(trips).build();
+	}
+	
+	
 	
 	@PUT @Path("{id}")
 	@Consumes({MediaType.APPLICATION_JSON})
@@ -54,6 +65,8 @@ public class TripResource {
 		String message=""; 
 		int status=0;
 		 
+		if(t.getId() == 0) t.setId(id);
+		
 		if(tripWasUpdated(id,t)){
 			status = 200; //OK
 			message = "trip has been updated";
@@ -72,7 +85,7 @@ public class TripResource {
 	}
 	
 	private boolean tripWasUpdated(Integer id, Trip trip) {
-		return tripDao.updateTripById(id, trip) == 1;
+		return tripDao.updateTripById(trip) == 1;
 	}
 
 

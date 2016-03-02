@@ -1,14 +1,16 @@
 package com.xroads.dao;
 
-import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import com.xroads.dao.entities.Trip;
 
 public interface TripDao {
 
-	Trip readTripById(@Param("id") Integer id);
+	Trip readTripById(Integer id);
 	
 	public long createTrip(Trip trip);
 	
-	public long updateTripById(Integer id, Trip trip);
+	public long updateTripById(Trip trip);
+	
+	List <Trip> readTripByChampion(Integer tripChampion);
 }

@@ -4,6 +4,20 @@
 
 <mapper namespace="com.xroads.dao.UserDao">
 
+  <select id="readUserByMobile" parameterType="String" resultMap="userMap">
+    SELECT
+      id,
+      email,
+      user_mobile,
+      user_name,
+      is_registered, 
+      created_at,
+      updated_at
+    FROM
+    `user` u 
+    WHERE u.user_mobile = #{userMobile}
+  </select>
+  
   <select id="readUserByEmail" parameterType="String" resultMap="userMap">
     SELECT
       id,
@@ -17,6 +31,14 @@
     `user` u 
     WHERE u.email = #{email}
   </select>
+  
+   <insert id="createUser" parameterType="User" useGeneratedKeys="true"   >
+		INSERT INTO user 
+			(email, user_mobile, user_name, password, is_registered, created_at, updated_at)
+		VALUES
+			 ( #{email}, #{userMobile}, #{userName}, #{password}, #{isRegistered}, now(),  now())
+			
+ 	</insert>  
 
   <resultMap id="userMap" type="User">
     <id property="id" column="id" />

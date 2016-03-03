@@ -6,8 +6,10 @@ import com.xroads.dao.entities.User;
 
 public interface UserDao {
 	
-	User readUserByEmail(@Param("email") String email);
-	
-	
+	public User readUserByMobile(@Param("userMobile") String userMobile);
 
+	public User readUserByEmail(@Param("email") String email);
+	
+	public long createUser(User user);
+	
 }

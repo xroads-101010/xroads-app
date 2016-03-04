@@ -13,10 +13,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-
 
 import com.xroads.dao.TripDao;
 import com.xroads.dao.entities.Trip;
@@ -40,21 +39,26 @@ public class TripResource {
 	}	
 	
 	
+	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTripById(@QueryParam("id") Integer id){
 		Trip trip = tripDao.readTripById(id);
-		return Response.ok(trip).build();
+		JSONObject mainObj = new JSONObject();
+		mainObj.put("trip",  trip);
+		return Response.ok(mainObj).build();
 	}
 	
+
+	@SuppressWarnings("unchecked")
 	@GET @Path("{champion}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response getTripByChampion(@QueryParam("id") Integer tripChampion){
 		List<Trip> trips = tripDao.readTripByChampion(tripChampion);
-		return Response.ok(trips).build();
+		JSONObject mainObj = new JSONObject();
+		mainObj.put("trips",  trips);
+		return Response.ok(mainObj).build();
 	}
-	
-	
 	
 	@PUT @Path("{id}")
 	@Consumes({MediaType.APPLICATION_JSON})
@@ -87,6 +91,5 @@ public class TripResource {
 	private boolean tripWasUpdated(Integer id, Trip trip) {
 		return tripDao.updateTripById(trip) == 1;
 	}
-
 
 }

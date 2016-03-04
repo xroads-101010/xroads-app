@@ -32,13 +32,28 @@
     WHERE u.email = #{email}
   </select>
   
-   <insert id="createUser" parameterType="User" useGeneratedKeys="true"   >
+   <insert id="createUser" parameterType="User" useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
 		INSERT INTO user 
 			(email, user_mobile, user_name, password, is_registered, created_at, updated_at)
 		VALUES
 			 ( #{email}, #{userMobile}, #{userName}, #{password}, #{isRegistered}, now(),  now())
-			
- 	</insert>  
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>		
+ 	</insert>
+ 	
+ 	<select id="getAllUsers" resultMap="userMap">
+    SELECT
+      id,
+      email,
+      user_mobile,
+      user_name,
+      is_registered, 
+      created_at,
+      updated_at
+    FROM
+    `user` u 
+  </select>  
 
   <resultMap id="userMap" type="User">
     <id property="id" column="id" />

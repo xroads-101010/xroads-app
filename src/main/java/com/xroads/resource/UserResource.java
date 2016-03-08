@@ -1,5 +1,7 @@
 package com.xroads.resource;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -52,10 +54,19 @@ public class UserResource {
 	
 	@POST 
 	@Consumes({MediaType.APPLICATION_JSON})
-	@Produces({MediaType.TEXT_HTML})	
+	@Produces({MediaType.APPLICATION_JSON})	
 	public Response createUser(User user) {	
 		userDao.createUser(user);	
-		return Response.status(201).entity("User Registered").build(); 		
+		return Response.ok(user.getId()).build();		
 	}
+	
+	@Path("/allUsers")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUsers(){
+		List<User> users = userDao.getAllUsers();
+		return Response.ok(users).build();
+	}
+	
 	
 }

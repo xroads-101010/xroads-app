@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.xroads.dao.UserDao;
 import com.xroads.dao.entities.User;
+import com.xroads.dto.Credential;
 
 @Component
 @Path("/user")
@@ -35,7 +36,20 @@ public class UserResource {
 		return Response.ok(user).build();
 	}
 	
-
+	@Path("/validate")
+	@POST
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response validateUser(Credential credential)
+	{
+		User user = userDao.validateUser(credential);
+		if(user!=null)
+		return Response.ok(user).build();
+		else 
+		return Response.ok("0").build();
+		
+	}
+	
 	@POST 
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.TEXT_HTML})	

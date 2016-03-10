@@ -18,7 +18,7 @@
     <property name="driverClass" value="com.mysql.jdbc.Driver" />
     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/xroads" />
     <property name="user" value="root" />
-    <property name="password" value="root" />
+    <property name="password" value="admin" />
   </bean>
 	
   <tx:annotation-driven transaction-manager="transactionManager" />
@@ -45,9 +45,24 @@
     <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
   </bean>
   
+
   <bean id="tripMemberLocationDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.xroads.dao.TripMemberLocationDao" />
     <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
   </bean>
+
+
+   <bean id="tripDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.xroads.dao.TripDao" />
+    <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
+  </bean>
+  
+
+   <bean id="tripMemberDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.xroads.dao.TripMemberDao" />
+    <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
+  </bean>
+
+
 
 </beans>

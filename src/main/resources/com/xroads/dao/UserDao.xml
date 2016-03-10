@@ -4,6 +4,28 @@
 
 <mapper namespace="com.xroads.dao.UserDao">
 
+  <select id="readUserByMobile" parameterType="String" resultMap="userMap">
+    SELECT
+      id,
+      email,
+      user_mobile,
+      user_name,
+      is_registered, 
+      created_at,
+      updated_at
+    FROM
+    `user` u 
+    WHERE u.user_mobile = #{userMobile}
+  </select>
+  
+   <select id="validateUser" parameterType="com.xroads.dto.Credential" resultMap="userMap">
+    SELECT
+      email
+    FROM
+    `user` u 
+    WHERE u.user_name = #{userName} and u.password = #{password}
+  </select>
+  
   <select id="readUserByEmail" parameterType="String" resultMap="userMap">
     SELECT
       id,
@@ -17,10 +39,34 @@
     `user` u 
     WHERE u.email = #{email}
   </select>
+  
+   <insert id="createUser" parameterType="User" useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
+		INSERT INTO user 
+			(email, user_mobile, user_name, password, is_registered, created_at, updated_at)
+		VALUES
+			 ( #{email}, #{userMobile}, #{userName}, #{password}, #{isRegistered}, now(),  now())
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>		
+ 	</insert>
+ 	
+ 	<select id="getAllUsers" resultMap="userMap">
+    SELECT
+      id,
+      email,
+      user_mobile,
+      user_name,
+      is_registered, 
+      created_at,
+      updated_at
+    FROM
+    `user` u 
+  </select>  
 
   <resultMap id="userMap" type="User">
     <id property="id" column="id" />
     <result property="email" column="email" />
+    <result property="password" column="password" />
     <result property="userMobile" column="user_mobile" />
     <result property="userName" column="user_name" />
     <result property="isRegistered" column="is_registered" />

@@ -21,11 +21,13 @@
   
   <typeAliases>
     <typeAlias alias="User" type="com.xroads.dao.entities.User" />
-    <typeAlias alias="TripMemberLocation" type="com.xroads.dao.entities.TripMemberLocation" />
-    
+    <typeAlias alias="TripMemberLocation" type="com.xroads.dao.entities.TripMemberLocation" />   
+    <typeAlias alias="Trip" type="com.xroads.dao.entities.Trip" />
+    <typeAlias alias="TripMember" type="com.xroads.dao.entities.TripMember" />
     <package name="com.xroads.dao.entities" />
   </typeAliases>
 
+ 
   <typeHandlers>
     <typeHandler handler="com.xroads.dao.util.DateTimeTypeHandler" javaType="org.joda.time.DateTime"/>
   </typeHandlers>
@@ -33,6 +35,8 @@
   <mappers>
     <mapper class="com.xroads.dao.UserDao" />
     <mapper class="com.xroads.dao.TripMemberLocationDao" />
+    <mapper class="com.xroads.dao.TripDao" />
+    <mapper class="com.xroads.dao.TripMemberDao" />
   </mappers>
 
 </configuration>

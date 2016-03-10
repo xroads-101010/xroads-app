@@ -12,6 +12,7 @@ public class User implements Serializable {
 	private String email;
 	private String userMobile;
 	private String userName;
+	private String password;
 	private Boolean isRegistered;
 	private DateTime createdAt;
 	private DateTime updatedAt;
@@ -39,6 +40,12 @@ public class User implements Serializable {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Boolean getIsRegistered() {
 		return isRegistered;

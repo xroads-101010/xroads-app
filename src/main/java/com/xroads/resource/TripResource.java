@@ -17,8 +17,9 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xroads.dao.TripDao;
 import com.xroads.dao.entities.Trip;
+import com.xroads.dto.TripDTO;
+import com.xroads.service.TripService;
 
 
 @Component
@@ -26,15 +27,15 @@ import com.xroads.dao.entities.Trip;
 public class TripResource {
 
 	@Autowired
-	TripDao tripDao;
-	
+	TripService tripService;
+		
 
 	@POST 
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.TEXT_HTML})	
-	public Response NewTrip(Trip trip) {
-	
-		tripDao.createTrip(trip);	
+	public Response newTrip(TripDTO tripDTO ) {
+		
+		tripService.newTrip(tripDTO);
 		return Response.status(201).entity("A new trip has been added").build(); 		
 	}	
 	
@@ -42,10 +43,10 @@ public class TripResource {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getTripById(@QueryParam("id") Integer id){
-		Trip trip = tripDao.readTripById(id);
+	public Response getTripById(@QueryParam("tripId") Integer tripId, @QueryParam("userId") Integer userId){
+		TripDTO TripDTO = tripService.readTripById(tripId,userId);
 		JSONObject mainObj = new JSONObject();
-		mainObj.put("trip",  trip);
+		mainObj.put("trip",  TripDTO);
 		return Response.ok(mainObj).build();
 	}
 	
@@ -54,7 +55,7 @@ public class TripResource {
 	@GET @Path("{champion}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response getTripByChampion(@QueryParam("id") Integer tripChampion){
-		List<Trip> trips = tripDao.readTripByChampion(tripChampion);
+		List<Trip> trips = tripService.readTripByChampion(tripChampion);
 		JSONObject mainObj = new JSONObject();
 		mainObj.put("trips",  trips);
 		return Response.ok(mainObj).build();
@@ -71,7 +72,7 @@ public class TripResource {
 		 
 		if(t.getId() == 0) t.setId(id);
 		
-		if(tripWasUpdated(id,t)){
+		if(tripService.updatetripById(id,t)){
 			status = 200; //OK
 			message = "trip has been updated";
 		} 
@@ -83,13 +84,9 @@ public class TripResource {
 					+ " If you want to UPDATE please make sure you provide an existent <strong>id</strong> <br/>";
 		}
 			
-		return Response.status(status).entity(message).build();		
-	
+		return Response.status(status).entity(message).build();			
 	
 	}
 	
-	private boolean tripWasUpdated(Integer id, Trip trip) {
-		return tripDao.updateTripById(trip) == 1;
-	}
 
 }

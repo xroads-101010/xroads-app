@@ -18,10 +18,10 @@
     <property name="driverClass" value="com.mysql.jdbc.Driver" />
     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/xroads" />
     <property name="user" value="root" />
-    <property name="password" value="admin" />
+    <property name="password" value="" />
   </bean>
 	
-  <tx:annotation-driven transaction-manager="transactionManager" />
+  <tx:annotation-driven transaction-manager="transactionManager" ></tx:annotation-driven>
 
   <bean id="xroadsTxnManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="xroadsDatasource" />
@@ -55,6 +55,9 @@
    <bean id="tripMemberDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.xroads.dao.TripMemberDao" />
     <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
+  </bean>
+  
+   <bean id="tripService" class="com.xroads.service.TripService">
   </bean>
 
 

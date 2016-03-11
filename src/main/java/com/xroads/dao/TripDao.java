@@ -6,7 +6,7 @@ import com.xroads.dao.entities.Trip;
 
 public interface TripDao {
 
-	Trip readTripById(Integer id);
+	Trip readTripById(Integer tripId);
 	
 	public long createTrip(Trip trip);
 	

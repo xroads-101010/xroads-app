@@ -5,14 +5,17 @@
 <mapper namespace="com.xroads.dao.TripMemberDao">
 
   <select id="getTripMembersByTripId"  parameterType="int" resultMap="tripMemberMap">
-    SELECT
-      trip_id,
-      member_id,
-      member_starting_location,
-      has_member_joined
-    FROM
-    `trip_members` tm
-    WHERE tm.trip_id = #{tripId}
+   SELECT 
+   	tm.member_id, u.user_name, 
+   	tm.trip_id, tm.member_starting_location,
+	tm.has_member_joined, tml.current_location, 
+	tml.current_location_name
+   FROM 
+	trip_members tm, trip_member_location tml, user u
+   WHERE
+    tm.id = tml.trip_member_id
+    AND tm.member_id = u.id
+	AND tm.trip_id = #{tripId}; 
   </select>
 
   <insert id="addTripMembers" parameterType="java.util.List" useGeneratedKeys="true"   >
@@ -38,12 +41,15 @@
  
  </update>
 
-  <resultMap id="tripMemberMap" type="TripMember">
-    <id property="id" column="id" />
-    <result property="tripId" column="trip_id" />
+  
+  <resultMap id="tripMemberMap" type="TripMemberDTO">	
     <result property="memberId" column="member_id" />
+    <result property="memberName" column="user_name" />
+    <result property="tripId" column="trip_id" />
     <result property="memberStartingLocation" column="member_starting_location" />
     <result property="hasMemberJoined" column="has_member_joined" />
+    <result property="currentLocation" column="current_location" />
+    <result property="currentLocationName" column="current_location_name" />
   </resultMap>
 
  

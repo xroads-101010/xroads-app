@@ -17,7 +17,7 @@
       updated_at
     FROM
     `trip` t
-    WHERE t.id = #{id}
+    WHERE t.id = #{tripId}
   </select>
   
    <select id="readTripByChampion" parameterType="Integer" resultMap="tripMap" >
@@ -49,6 +49,10 @@
             end_time = now(),
             created_at = now(),
             updated_at = now()
+            
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
 			
  	</insert>  
  	

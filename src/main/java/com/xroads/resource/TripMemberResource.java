@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.xroads.dao.TripMemberDao;
 import com.xroads.dao.entities.TripMember;
+import com.xroads.dto.TripMemberDTO;
 
 @Component
 @Path("/tripmember")
@@ -29,7 +30,7 @@ public class TripMemberResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTripMembersByTripId(@QueryParam("tripId") Integer tripId){
-		TripMember[] tripMembers = tripMemberDao.getTripMembersByTripId(tripId);
+		List<TripMemberDTO> tripMembers = tripMemberDao.getTripMembersByTripId(tripId);
 		return Response.ok(tripMembers).build();
 	}
 	

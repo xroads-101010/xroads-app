@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.xroads.dao.entities.TripMember;
+import com.xroads.dto.TripMemberDTO;
 
 public interface TripMemberDao {
 	
@@ -12,6 +13,6 @@ public interface TripMemberDao {
 	
 	public long updateTripMember(TripMember tripMember);
 	
-	public TripMember[] getTripMembersByTripId(@Param("tripId") int tripId);
+	public List<TripMemberDTO> getTripMembersByTripId(@Param("tripId") int tripId);
 
 }

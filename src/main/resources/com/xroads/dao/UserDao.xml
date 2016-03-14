@@ -20,7 +20,13 @@
   
    <select id="validateUser" parameterType="com.xroads.dto.Credential" resultMap="userMap">
     SELECT
-      email
+      id,
+      email,
+      user_mobile,
+      user_name,
+      is_registered, 
+      created_at,
+      updated_at
     FROM
     `user` u 
     WHERE u.user_name = #{userName} and u.password = #{password}

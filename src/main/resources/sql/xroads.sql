@@ -55,7 +55,8 @@ insert into user(`email`,`user_name`,`user_mobile`,`password`,`is_registered`,`c
 insert into user(`user_mobile`,`created_at`,`updated_at`) values('9884098840',now(),now());
 
 -- insert trips
-insert into trip(`trip_name`,`trip_start`,`trip_destination`,`trip_champion`) values ('Trip1','sample trip_start 1','sample trip_destination 1',1);
+insert into trip(`trip_name`,`trip_destination`,`trip_champion`,`has_trip_started`,`start_time`,`end_time`,`created_at`,`updated_at`) values ('Trip1','sample trip_destination 1',1,'false',now(),now(),now(),now());
+insert into trip(`trip_name`,`trip_destination`,`trip_champion`,`has_trip_started`,`start_time`,`end_time`,`created_at`,`updated_at`) values ('Trip2','sample trip_destination 2',2,'false',now(),now(),now(),now());
 insert into trip(`trip_name`,`trip_start`,`trip_destination`,`trip_champion`) values ('Trip2','sample trip_start 2','sample trip_destination 2',2);
 
 -- insert members

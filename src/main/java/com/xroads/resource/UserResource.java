@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -26,6 +27,7 @@ public class UserResource {
 	@Autowired
 	UserDao userDao;
 	
+	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUser(@QueryParam("userMobile") String userMobile, @QueryParam("email") String email){
@@ -34,8 +36,11 @@ public class UserResource {
 			user = userDao.readUserByMobile(userMobile);
 		}else if(!StringUtils.isEmpty(email)){
 			user = userDao.readUserByEmail(email);
-		}		
-		return Response.ok(user).build();
+		}	
+		
+		JSONObject mainObj = new JSONObject();
+		mainObj.put("user",  user);
+		return Response.ok(mainObj).build();
 	}
 	
 	@Path("/validate")
@@ -60,12 +65,15 @@ public class UserResource {
 		return Response.ok(user.getId()).build();		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Path("/allUsers")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllUsers(){
 		List<User> users = userDao.getAllUsers();
-		return Response.ok(users).build();
+		JSONObject mainObj = new JSONObject();
+		mainObj.put("users",  users);
+		return Response.ok(mainObj).build();
 	}
 	
 	

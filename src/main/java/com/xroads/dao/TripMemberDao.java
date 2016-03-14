@@ -14,5 +14,8 @@ public interface TripMemberDao {
 	public long updateTripMember(TripMember tripMember);
 	
 	public List<TripMemberDTO> getTripMembersByTripId(@Param("tripId") int tripId);
+	
+	public List<TripMember> getActiveTripMembersByUserId(@Param("userId") int userId);
+
 
 }

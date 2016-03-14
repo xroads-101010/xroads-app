@@ -12,7 +12,15 @@ public class TripDTO {
 	
 	private String tripDestination;
 	
+	private double tripDestinationLat;
+
+	private double tripDestinationLong;
+	
 	private String startLocationForCurrentUser;
+	
+	private double startLocationForCurrentUserLat;
+
+	private double startLocationForCurrentUserLong;
 	
 	private int championUserId;
 	
@@ -94,6 +102,39 @@ public class TripDTO {
 
 	public void setTripMembers(List<TripMemberDTO> tripMembers) {
 		this.tripMembers = tripMembers;
+	}
+	public double getTripDestinationLat() {
+		return tripDestinationLat;
+	}
+
+	public void setTripDestinationLat(double tripDestinationLat) {
+		this.tripDestinationLat = tripDestinationLat;
+	}
+
+	public double getTripDestinationLong() {
+		return tripDestinationLong;
+	}
+
+	public void setTripDestinationLong(double tripDestinationLong) {
+		this.tripDestinationLong = tripDestinationLong;
+	}
+
+	public double getStartLocationForCurrentUserLat() {
+		return startLocationForCurrentUserLat;
+	}
+
+	public void setStartLocationForCurrentUserLat(
+			double startLocationForCurrentUserLat) {
+		this.startLocationForCurrentUserLat = startLocationForCurrentUserLat;
+	}
+
+	public double getStartLocationForCurrentUserLong() {
+		return startLocationForCurrentUserLong;
+	}
+
+	public void setStartLocationForCurrentUserLong(
+			double startLocationForCurrentUserLong) {
+		this.startLocationForCurrentUserLong = startLocationForCurrentUserLong;
 	}
 	
 	

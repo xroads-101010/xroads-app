@@ -10,11 +10,18 @@ public class TripMemberDTO {
 	
 	private String memberStartingLocation;
 	
+	private double memberStartingLocationLat;
+
+	private double memberStartingLocationLong;
+	
 	private Boolean hasMemberJoined;	
 	
 	private String currentLocation;
 	
-	private String currentLocationName;
+	private double currentLocationLat;
+	
+	private double currentLocationLong;
+
 
 	public int getMemberId() {
 		return memberId;
@@ -64,14 +71,38 @@ public class TripMemberDTO {
 		this.currentLocation = currentLocation;
 	}
 
-	public String getCurrentLocationName() {
-		return currentLocationName;
+	public double getMemberStartingLocationLat() {
+		return memberStartingLocationLat;
 	}
 
-	public void setCurrentLocationName(String currentLocationName) {
-		this.currentLocationName = currentLocationName;
+	public void setMemberStartingLocationLat(double memberStartingLocationLat) {
+		this.memberStartingLocationLat = memberStartingLocationLat;
 	}
-	
+
+	public double getMemberStartingLocationLong() {
+		return memberStartingLocationLong;
+	}
+
+	public void setMemberStartingLocationLong(double memberStartingLocationLong) {
+		this.memberStartingLocationLong = memberStartingLocationLong;
+	}
+
+	public double getCurrentLocationLat() {
+		return currentLocationLat;
+	}
+
+	public void setCurrentLocationLat(double currentLocationLat) {
+		this.currentLocationLat = currentLocationLat;
+	}
+
+	public double getCurrentLocationLong() {
+		return currentLocationLong;
+	}
+
+	public void setCurrentLocationLong(double currentLocationLong) {
+		this.currentLocationLong = currentLocationLong;
+	}
+
 	
 	
 }

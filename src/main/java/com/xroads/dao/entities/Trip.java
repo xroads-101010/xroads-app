@@ -11,6 +11,8 @@ public class Trip implements Serializable {
 	private int id;
 	private String tripName;
 	private String tripDestination;
+	private double tripDestinationLat;
+	private double tripDestinationLong;
 	private int tripChampion;
 	private Boolean hasTripStarted;
 	private DateTime startTime;
@@ -35,6 +37,18 @@ public class Trip implements Serializable {
 	}
 	public void setTripDestination(String tripDestination) {
 		this.tripDestination = tripDestination;
+	}
+	public double getTripDestinationLat() {
+		return tripDestinationLat;
+	}
+	public void setTripDestinationLat(double tripDestinationLat) {
+		this.tripDestinationLat = tripDestinationLat;
+	}
+	public double getTripDestinationLong() {
+		return tripDestinationLong;
+	}
+	public void setTripDestinationLong(double tripDestinationLong) {
+		this.tripDestinationLong = tripDestinationLong;
 	}
 	public int getTripChampion() {
 		return tripChampion;

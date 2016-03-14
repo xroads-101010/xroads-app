@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS `trip` (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `trip_name` VARCHAR(128) NOT NULL,
   `trip_destination` VARCHAR(128) NOT NULL,
+  `trip_destination_lat` double,
+  `trip_destination_long` double,
   `trip_champion` SMALLINT UNSIGNED,  
   `has_trip_started` BOOLEAN DEFAULT 0,
   `start_time` timestamp,
@@ -33,6 +35,8 @@ CREATE TABLE IF NOT EXISTS `trip_members` (
   `member_id` SMALLINT UNSIGNED,  
   `has_member_joined` boolean not null DEFAULT 0,
   `member_starting_location` VARCHAR(128),
+  `member_starting_location_lat` double,
+  `member_starting_location_long` double,
    PRIMARY KEY (`id`),
    CONSTRAINT `trip_member_fk` FOREIGN KEY (`member_id`) REFERENCES `user` (`id`),
    CONSTRAINT `trip_fk` FOREIGN KEY (`trip_id`) REFERENCES `trip` (`id`)
@@ -42,24 +46,9 @@ CREATE TABLE IF NOT EXISTS `trip_member_location` (
   `trip_member_id` SMALLINT UNSIGNED,
   `distance_to_destination` double,
   `current_location` VARCHAR(45),  
+  `current_location_lat` double,  
+  `current_location_long` double,  
   `created_at` timestamp,
-  `updated_at` timestamp
-);
-
--- insert users
-insert into user(`email`,`user_name`,`user_mobile`,`password`,`is_registered`,`created_at`,`updated_at`) values('abc1@gmail.com','abc1','9840198222','passwd',1, now(), now());
-insert into user(`email`,`user_name`,`user_mobile`,`password`,`is_registered`,`created_at`,`updated_at`) values('abc2@gmail.com','abc2','9840198412','passwd',1, now(), now());
-insert into user(`email`,`user_name`,`user_mobile`,`password`,`is_registered`,`created_at`,`updated_at`) values('ab3@gmail.com','abc3','9840198111','passwd',1, now(), now());
-insert into user(`email`,`user_name`,`user_mobile`,`password`,`is_registered`,`created_at`,`updated_at`) values('abc4@gmail.com','abc4','9840198409','passwd',1, now(), now());
-insert into user(`email`,`user_name`,`user_mobile`,`password`,`is_registered`,`created_at`,`updated_at`) values('abc5@gmail.com','abc5','9840198402','passwd',1, now(), now());
-insert into user(`user_mobile`,`created_at`,`updated_at`) values('9884098840',now(),now());
-
--- insert trips
-insert into trip(`trip_name`,`trip_start`,`trip_destination`,`trip_champion`) values ('Trip1','sample trip_start 1','sample trip_destination 1',1);
-insert into trip(`trip_name`,`trip_start`,`trip_destination`,`trip_champion`) values ('Trip2','sample trip_start 2','sample trip_destination 2',2);
-
--- insert members
-insert into trip_members(`trip_id`,`member_id`) values (1, 3);
-insert into trip_members(`trip_id`,`member_id`,`member_starting_location`) values (1, 4,'chennai');
-insert into trip_members(`trip_id`,`member_id`,`member_starting_location`) values (1, 5,'vellore');
-insert into trip_members(`trip_id`,`member_id`,`member_starting_location`) values (2, 6,'nellore');
+  `updated_at` timestamp,
+  PRIMARY KEY (`trip_member_id`)
+ );

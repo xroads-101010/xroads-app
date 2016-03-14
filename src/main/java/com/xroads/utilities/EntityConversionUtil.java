@@ -16,6 +16,8 @@ public class EntityConversionUtil  {
 		Trip trip = new Trip();	
 		trip.setTripName(tripDTO.getTripName());
 		trip.setTripDestination(tripDTO.getTripDestination());
+		trip.setTripDestinationLat(tripDTO.getTripDestinationLat());
+		trip.setTripDestinationLong(tripDTO.getTripDestinationLong());
 		trip.setTripChampion(tripDTO.getChampionUserId());
 		trip.setHasTripStarted(tripDTO.getHasTripStarted());
 		trip.setEndTime(tripDTO.getEndTime());
@@ -31,6 +33,8 @@ public class EntityConversionUtil  {
 			tripMember.setTripId(tripDTO.getTripId());
 			tripMember.setMemberId(tripMemberDTO.getMemberId());
 			tripMember.setMemberStartingLocation(tripDTO.getStartLocationForCurrentUser());
+			tripMember.setMemberStartingLocationLat(tripDTO.getStartLocationForCurrentUserLat());
+			tripMember.setMemberStartingLocationLong(tripDTO.getStartLocationForCurrentUserLong());
 			tripMember.setHasMemberJoined(tripMemberDTO.getHasMemberJoined());
 			tripMemberList.add(tripMember);
 		}
@@ -43,6 +47,8 @@ public class EntityConversionUtil  {
 		tripMember.setTripId(tripDTO.getTripId());
 		tripMember.setMemberId(tripDTO.getChampionUserId());
 		tripMember.setMemberStartingLocation(tripDTO.getStartLocationForCurrentUser());
+		tripMember.setMemberStartingLocationLat(tripDTO.getStartLocationForCurrentUserLat());
+		tripMember.setMemberStartingLocationLong(tripDTO.getStartLocationForCurrentUserLong());
 		tripMember.setHasMemberJoined(true);
 		return tripMember;
 	}

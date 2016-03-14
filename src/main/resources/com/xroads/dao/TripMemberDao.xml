@@ -8,23 +8,40 @@
    SELECT 
    	tm.member_id, u.user_name, 
    	tm.trip_id, tm.member_starting_location,
-	tm.has_member_joined, tml.current_location, 
-	tml.current_location_name
+   	tm.member_starting_location_lat, tm.member_starting_location_long,
+	tm.has_member_joined, tml.current_location,
+	tml.current_location_lat, tml.current_location_long
    FROM 
-	trip_members tm, trip_member_location tml, user u
+	trip_members tm 
+	JOIN user u ON tm.member_id = u.id
+	LEFT JOIN trip_member_location tml on tm.id = tml.trip_member_id
    WHERE
-    tm.id = tml.trip_member_id
-    AND tm.member_id = u.id
-	AND tm.trip_id = #{tripId}; 
+	 tm.trip_id = #{tripId}; 
+  </select>
+  
+    <select id="getActiveTripMembersByUserId"  parameterType="int" resultMap="tripMemberEntityMap">
+   SELECT t.id, 
+   	tm.member_id,
+   	tm.trip_id, tm.member_starting_location,
+   	tm.member_starting_location_lat, tm.member_starting_location_long,
+	tm.has_member_joined
+   FROM 
+	trip_members tm JOIN trip t
+   ON
+   	t.id= tm.trip_id
+   WHERE
+	 tm.member_id = #{userId} AND 
+	 tm.has_member_joined = 1
   </select>
 
   <insert id="addTripMembers" parameterType="java.util.List" useGeneratedKeys="true"   >
 	INSERT INTO trip_members (trip_id, member_id, 
-				member_starting_location, has_member_joined)
+				member_starting_location, member_starting_location_lat, member_starting_location_long, has_member_joined)
 		VALUES
 	<foreach collection="list" item="element" index="index"  separator=","  >
 		 ( #{	element.tripId}, #{element.memberId}, 
-				#{element.memberStartingLocation}, #{element.hasMemberJoined})
+				#{element.memberStartingLocation}, #{element.memberStartingLocationLat}, 
+				#{element.memberStartingLocationLong}, #{element.hasMemberJoined})
 	</foreach>			
  </insert>  
  
@@ -33,6 +50,8 @@
  		trip_members tm
  	SET
  		tm.member_starting_location = #{memberStartingLocation},
+ 		tm.member_starting_location_lat = #{memberStartingLocationLat},
+  		tm.member_starting_location_long = #{memberStartingLocationLong},
  		tm.has_member_joined = #{hasMemberJoined}
  	WHERE
  		tm.member_id = #{memberId}
@@ -47,11 +66,23 @@
     <result property="memberName" column="user_name" />
     <result property="tripId" column="trip_id" />
     <result property="memberStartingLocation" column="member_starting_location" />
+    <result property="memberStartingLocationLat" column="member_starting_location_lat" />
+    <result property="memberStartingLocationLong" column="member_starting_location_long" />
     <result property="hasMemberJoined" column="has_member_joined" />
     <result property="currentLocation" column="current_location" />
-    <result property="currentLocationName" column="current_location_name" />
+    <result property="currentLocationLat" column="current_location_lat" />
+    <result property="currentLocationLong" column="current_location_long" />    
   </resultMap>
 
+ <resultMap id="tripMemberEntityMap" type="TripMember">	
+    <result property="id" column="id" />
+    <result property="memberId" column="member_id" />
+    <result property="tripId" column="trip_id" />
+    <result property="memberStartingLocation" column="member_starting_location" />
+    <result property="memberStartingLocationLat" column="member_starting_location_lat" />
+    <result property="memberStartingLocationLong" column="member_starting_location_long" />
+    <result property="hasMemberJoined" column="has_member_joined" /> 
+  </resultMap>
  
 
 </mapper>

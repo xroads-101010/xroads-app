@@ -56,13 +56,17 @@ public class TripService {
 		tripDTO.setTripId(trip.getId());
 		tripDTO.setTripName(trip.getTripName());
 		tripDTO.setTripDestination(trip.getTripDestination());
+		tripDTO.setTripDestinationLat(trip.getTripDestinationLat());
+		tripDTO.setTripDestinationLong(trip.getTripDestinationLong());
 		tripDTO.setChampionUserId(trip.getTripChampion());
 		tripDTO.setStartTime(trip.getStartTime());
 		tripDTO.setEndTime(trip.getEndTime());
 		tripDTO.setTripMembers(tripMemberDTOList);
 		for(TripMemberDTO tripMemberDTO:tripMemberDTOList){
 			if(userId == tripMemberDTO.getMemberId()){
-				tripDTO.setStartLocationForCurrentUser(tripMemberDTO.getCurrentLocationName());
+				tripDTO.setStartLocationForCurrentUser(tripMemberDTO.getCurrentLocation());
+				tripDTO.setStartLocationForCurrentUserLat(tripMemberDTO.getCurrentLocationLat());
+				tripDTO.setStartLocationForCurrentUserLong(tripMemberDTO.getCurrentLocationLong());
 				break;
 			}
 		}

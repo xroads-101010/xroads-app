@@ -10,6 +10,8 @@ public class TripMember implements Serializable {
 	private int tripId;
 	private int memberId;
 	private String memberStartingLocation;
+	private double memberStartingLocationLat;
+	private double memberStartingLocationLong;
 	private Boolean hasMemberJoined;
 	
 	
@@ -36,6 +38,18 @@ public class TripMember implements Serializable {
 	}
 	public void setMemberStartingLocation(String memberStartingLocation) {
 		this.memberStartingLocation = memberStartingLocation;
+	}
+	public double getMemberStartingLocationLat() {
+		return memberStartingLocationLat;
+	}
+	public void setMemberStartingLocationLat(double memberStartingLocationLat) {
+		this.memberStartingLocationLat = memberStartingLocationLat;
+	}
+	public double getMemberStartingLocationLong() {
+		return memberStartingLocationLong;
+	}
+	public void setMemberStartingLocationLong(double memberStartingLocationLong) {
+		this.memberStartingLocationLong = memberStartingLocationLong;
 	}
 	public Boolean getHasMemberJoined() {
 		return hasMemberJoined;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xroads.dao.TripMemberLocationDao">
+
+  <insert id="addOrUpdateMemberLocation" parameterType="java.util.List" keyProperty='tripMemberId' keyColumn="trip_member_id">
+    INSERT INTO
+    `trip_member_location` (trip_member_id, current_location, current_location_lat, current_location_long, created_at, updated_at) VALUES
+     <foreach collection="list" item="element" index="index" 	 separator="," > 
+    (#{element.tripMemberId}, #{element.currentLocation}, #{element.currentLocationLat}, #{element.currentLocationLong}, #{element.createdAt}, #{element.updatedAt})
+     </foreach>
+     ON DUPLICATE KEY UPDATE    
+    	current_location = values(current_location),      
+        current_location_lat = values(current_location_lat),      
+        current_location_long = values(current_location_long),
+        updated_at = values (updated_at) 
+    
+  </insert>
+
+
+</mapper>

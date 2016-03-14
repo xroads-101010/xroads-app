@@ -44,7 +44,6 @@
     <property name="mapperInterface" value="com.xroads.dao.UserDao" />
     <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
   </bean>
-  
 
    <bean id="tripDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.xroads.dao.TripDao" />
@@ -60,5 +59,9 @@
    <bean id="tripService" class="com.xroads.service.TripService">
   </bean>
 
+  <bean id="tripMemberLocationDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.xroads.dao.TripMemberLocationDao" />
+    <property name="sqlSessionFactory" ref="xroadsSqlSessionFactory" />
+  </bean>
 
 </beans>

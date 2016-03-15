@@ -10,6 +10,7 @@ import com.xroads.dao.entities.Trip;
 import com.xroads.dao.entities.TripMember;
 import com.xroads.dto.TripDTO;
 import com.xroads.dto.TripMemberDTO;
+import com.xroads.utilities.DateTimeUtil;
 import com.xroads.utilities.EntityConversionUtil;
 	
 public class TripService {

@@ -52,3 +52,4 @@ CREATE TABLE IF NOT EXISTS `trip_member_location` (
   `updated_at` timestamp,
   PRIMARY KEY (`trip_member_id`)
  );
+

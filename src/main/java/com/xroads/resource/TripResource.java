@@ -61,15 +61,10 @@ public class TripResource {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@GET @Path("{user}")
+	@GET @Path("{all}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Response getUserTrips(@QueryParam("userId") Integer userId, @QueryParam("tripChampion") Boolean tripChampion){
-		List<Trip> trips;
-		if(tripChampion){
-			trips = tripService.readTripByChampion(userId);
-		}else{
-			trips = tripService.getUserTrips(userId);
-		}
+	public Response getUserTrips(@QueryParam("userId") Integer userId){
+		List<Trip> trips = tripService.getUserTrips(userId);		
 		JSONObject mainObj = new JSONObject();
 		mainObj.put("trips",  trips);
 		return Response.ok(mainObj).build();

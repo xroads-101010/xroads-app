@@ -39,6 +39,25 @@
     `trip` t
     WHERE t.trip_champion = #{tripChampion}       	
     </select>
+    
+    <select id="getUserTrips" parameterType="Integer" resultMap="tripMap" >
+      SELECT
+      t.id,
+      t.trip_name,
+      t.trip_destination,
+      t.trip_destination_lat,
+      t.trip_destination_long,
+      t.trip_champion,
+      t.has_trip_started, 
+      t.start_time,
+      t.end_time,
+      t.created_at,
+      t.updated_at
+    FROM
+    trip t JOIN  trip_members tm 
+    ON t.id= tm.trip_id   	   
+    WHERE tm.member_id = #{userId} 
+    </select>
 
     <insert id="createTrip" parameterType="Trip" useGeneratedKeys="true"   >
 		INSERT 
@@ -51,8 +70,8 @@
       		trip_destination_long  = #{tripDestinationLong},
             trip_champion = #{tripChampion},
             has_trip_started = #{hasTripStarted},
-            start_time = now(),
-            end_time = now(),
+            start_time =  #{startTime},
+            end_time =  #{endTime},
             created_at = now(),
             updated_at = now()
             

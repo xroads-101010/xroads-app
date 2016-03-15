@@ -46,6 +46,13 @@ public class TripService {
 		return trips;
 	}
 	
+
+	public List <Trip> getUserTrips(Integer userId){
+		List<Trip> trips = tripDao.getUserTrips(userId)	;
+		return trips;
+	}
+	
+	
 	
 	public boolean updatetripById (Integer id, Trip trip) {
 		return tripDao.updateTripById(trip) == 1;

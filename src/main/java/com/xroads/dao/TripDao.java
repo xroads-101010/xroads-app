@@ -13,4 +13,6 @@ public interface TripDao {
 	public long updateTripById(Trip trip);
 	
 	List <Trip> readTripByChampion(Integer tripChampion);
+	
+	List <Trip> getUserTrips(Integer userId);
 }

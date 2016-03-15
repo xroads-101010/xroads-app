@@ -51,11 +51,25 @@ public class TripResource {
 	}
 	
 
+	/**
+	 * Get the trip details of trips that the user is part of
+	 * If tripChampion is 
+	 * 			True - Retrieve only trips for which this user is a champion
+	 * 			False - Retrieve all trips that the user is a member of
+	 * @param userId
+	 * @param tripChampion
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	@GET @Path("{champion}")
+	@GET @Path("{user}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Response getTripByChampion(@QueryParam("id") Integer tripChampion){
-		List<Trip> trips = tripService.readTripByChampion(tripChampion);
+	public Response getUserTrips(@QueryParam("userId") Integer userId, @QueryParam("tripChampion") Boolean tripChampion){
+		List<Trip> trips;
+		if(tripChampion){
+			trips = tripService.readTripByChampion(userId);
+		}else{
+			trips = tripService.getUserTrips(userId);
+		}
 		JSONObject mainObj = new JSONObject();
 		mainObj.put("trips",  trips);
 		return Response.ok(mainObj).build();

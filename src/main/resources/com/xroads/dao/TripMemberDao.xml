@@ -9,12 +9,12 @@
    	tm.member_id, u.user_name, 
    	tm.trip_id, tm.member_starting_location,
    	tm.member_starting_location_lat, tm.member_starting_location_long,
-	tm.has_member_joined, tml.current_location,
-	tml.current_location_lat, tml.current_location_long
+	tm.has_member_joined, ul.current_location,
+	ul.current_location_lat, ul.current_location_long
    FROM 
 	trip_members tm 
 	JOIN user u ON tm.member_id = u.id
-	LEFT JOIN trip_member_location tml on tm.id = tml.trip_member_id
+	LEFT JOIN user_location ul on tm.member_id = ul.user_id
    WHERE
 	 tm.trip_id = #{tripId}; 
   </select>

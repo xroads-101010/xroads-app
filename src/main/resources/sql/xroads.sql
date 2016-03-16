@@ -42,14 +42,15 @@ CREATE TABLE IF NOT EXISTS `trip_members` (
    CONSTRAINT `trip_fk` FOREIGN KEY (`trip_id`) REFERENCES `trip` (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `trip_member_location` (
-  `trip_member_id` SMALLINT UNSIGNED,
+CREATE TABLE IF NOT EXISTS `user_location` (
+  `user_id` SMALLINT UNSIGNED,
   `distance_to_destination` double,
   `current_location` VARCHAR(45),  
   `current_location_lat` double,  
   `current_location_long` double,  
   `created_at` timestamp,
   `updated_at` timestamp,
-  PRIMARY KEY (`trip_member_id`)
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
  );
 

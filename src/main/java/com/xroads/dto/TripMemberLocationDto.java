@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TripMemberLocationDto {
 	
-	@JsonProperty(value="memberId")
-	private int memberId;
+	@JsonProperty(value="userId")
+	private int userId;
 	@JsonProperty(value="location")
 	private String location;
 	@JsonProperty(value="locationLat")
@@ -17,11 +17,11 @@ public class TripMemberLocationDto {
 	@JsonProperty(value="updatedAt")
 	private String updatedAt;
 	
-	public int getMemberId() {
-		return memberId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setUserId(int memberId) {
+		this.userId = memberId;
 	}
 	public String getLocation() {
 		return location;

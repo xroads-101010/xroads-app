@@ -4,12 +4,10 @@
 
 <mapper namespace="com.xroads.dao.TripMemberLocationDao">
 
-  <insert id="addOrUpdateMemberLocation" parameterType="java.util.List" keyProperty='tripMemberId' keyColumn="trip_member_id">
+  <insert id="addOrUpdateMemberLocation" parameterType="TripMemberLocation" keyProperty='tripMemberId' keyColumn="trip_member_id">
     INSERT INTO
-    `trip_member_location` (trip_member_id, current_location, current_location_lat, current_location_long, created_at, updated_at) VALUES
-     <foreach collection="list" item="element" index="index" 	 separator="," > 
-    (#{element.tripMemberId}, #{element.currentLocation}, #{element.currentLocationLat}, #{element.currentLocationLong}, #{element.createdAt}, #{element.updatedAt})
-     </foreach>
+    `user_location` (user_id, current_location, current_location_lat, current_location_long, created_at, updated_at) VALUES  
+    (#{userId}, #{currentLocation}, #{currentLocationLat}, #{currentLocationLong}, #{createdAt}, #{updatedAt})    
      ON DUPLICATE KEY UPDATE    
     	current_location = values(current_location),      
         current_location_lat = values(current_location_lat),      

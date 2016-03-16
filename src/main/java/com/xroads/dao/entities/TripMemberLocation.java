@@ -8,18 +8,18 @@ public class TripMemberLocation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int tripMemberId;
+	private int userId;
 	private String currentLocation;
 	private double currentLocationLat;
 	private double currentLocationLong;
 	private DateTime createdAt;
 	private DateTime updatedAt;
 	
-	public int getTripMemberId() {
-		return tripMemberId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setTripMemberId(int tripMemberId) {
-		this.tripMemberId = tripMemberId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getCurrentLocation() {
 		return currentLocation;

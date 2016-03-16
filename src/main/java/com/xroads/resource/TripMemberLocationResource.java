@@ -1,8 +1,5 @@
 package com.xroads.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.xroads.dao.TripMemberDao;
 import com.xroads.dao.TripMemberLocationDao;
-import com.xroads.dao.entities.TripMember;
 import com.xroads.dao.entities.TripMemberLocation;
 import com.xroads.dto.TripMemberLocationDto;
 
@@ -34,23 +30,17 @@ public class TripMemberLocationResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addTripMemberLocation(TripMemberLocationDto tripMemberLocationDto ){
-		
-		List<TripMember> tripMemberDTOList = tripMemberDao.getActiveTripMembersByUserId(tripMemberLocationDto.getMemberId());
-		List<TripMemberLocation> tripMemberLocationDTOList = new ArrayList<TripMemberLocation>();
+	
+		TripMemberLocation tripMemberLocation = null;
+		tripMemberLocation = new TripMemberLocation();
+		tripMemberLocation.setUserId(tripMemberLocationDto.getUserId());
+		tripMemberLocation.setCurrentLocation(tripMemberLocationDto.getLocation());
+		tripMemberLocation.setCurrentLocationLat(tripMemberLocationDto.getLocationLat());
+		tripMemberLocation.setCurrentLocationLong(tripMemberLocationDto.getLocationLong());
+		tripMemberLocation.setCreatedAt(new DateTime());
+		tripMemberLocation.setUpdatedAt(new DateTime());
 
-		for (TripMember tripMember:tripMemberDTOList){
-			TripMemberLocation tripMemberLocation = null;
-			tripMemberLocation = new TripMemberLocation();
-			tripMemberLocation.setTripMemberId(tripMember.getId());
-			tripMemberLocation.setCurrentLocation(tripMemberLocationDto.getLocation());
-			tripMemberLocation.setCurrentLocationLat(tripMemberLocationDto.getLocationLat());
-			tripMemberLocation.setCurrentLocationLong(tripMemberLocationDto.getLocationLong());
-			tripMemberLocation.setCreatedAt(new DateTime());
-			tripMemberLocation.setUpdatedAt(new DateTime());
-			tripMemberLocationDTOList.add(tripMemberLocation);
-		}			
-		
-		tripMemberLocationDao.addOrUpdateMemberLocation(tripMemberLocationDTOList);
+		tripMemberLocationDao.addOrUpdateMemberLocation(tripMemberLocation);
 		return Response.ok().build();
 	}
 	

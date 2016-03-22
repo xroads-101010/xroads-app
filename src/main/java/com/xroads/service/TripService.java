@@ -25,7 +25,7 @@ public class TripService {
 		
 		Trip trip = EntityConversionUtil.createTripEntityFromDTO(tripDTO);
 		tripDao.createTrip(trip);
-		tripDTO.setTripId(trip.getId());
+		tripDTO.setTripId(trip.getTripId());
 		
 		//Add Trip Members and the champion as a trip member
 		List<TripMember> tripMembers = EntityConversionUtil.createTripMemberEntitiesFromDTO(tripDTO);
@@ -60,7 +60,7 @@ public class TripService {
 	
 	private TripDTO createTripDTO(Trip trip, List<TripMemberDTO> tripMemberDTOList, Integer userId){
 		TripDTO tripDTO = new TripDTO();
-		tripDTO.setTripId(trip.getId());
+		tripDTO.setTripId(trip.getTripId());
 		tripDTO.setTripName(trip.getTripName());
 		tripDTO.setTripDestination(trip.getTripDestination());
 		tripDTO.setTripDestinationLat(trip.getTripDestinationLat());

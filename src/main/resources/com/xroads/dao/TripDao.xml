@@ -63,7 +63,7 @@
 		INSERT 
 			INTO trip
 		SET 
-			id = #{id},
+			id = #{tripId},
 			trip_name = #{tripName},
             trip_destination = #{tripDestination},
             trip_destination_lat  = #{tripDestinationLat},
@@ -75,7 +75,7 @@
             created_at = now(),
             updated_at = now()
             
-        <selectKey keyProperty="id" resultType="int" order="AFTER">
+        <selectKey keyProperty="tripId" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
 			
@@ -117,11 +117,11 @@
 				,updated_at = #{updatedAt}
 			</if>			
 		WHERE
-			t.id = #{id}
+			t.id = #{tripId}
  	</update>   
  	
   <resultMap id="tripMap" type="Trip">
-    <id property="id" column="id" />
+    <id property="tripId" column="id" />
     <result property="tripName" column="trip_name" />
     <result property="tripDestination" column="trip_destination" />
     <result property="tripDestinationLat" column="trip_destination_lat" />

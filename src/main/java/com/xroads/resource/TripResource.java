@@ -79,7 +79,7 @@ public class TripResource {
 		String message=""; 
 		int status=0;
 		 
-		if(t.getId() == 0) t.setId(id);
+		if(t.getTripId() == 0) t.setTripId(id);
 		
 		if(tripService.updatetripById(id,t)){
 			status = 200; //OK

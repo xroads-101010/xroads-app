@@ -8,7 +8,7 @@ public class Trip implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	private int tripId;
 	private String tripName;
 	private String tripDestination;
 	private double tripDestinationLat;
@@ -20,11 +20,11 @@ public class Trip implements Serializable {
 	private DateTime createdAt;
 	private DateTime updatedAt;
 	
-	public int getId() {
-		return id;
+	public int getTripId() {
+		return tripId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setTripId(int id) {
+		this.tripId = id;
 	}
 	public String getTripName() {
 		return tripName;

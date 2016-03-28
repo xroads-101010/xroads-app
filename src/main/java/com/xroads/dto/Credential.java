@@ -1,14 +1,14 @@
 package com.xroads.dto;
 
 public class Credential {
-	String userName;
+	String userMobile;
 	String password;
 	
-	public String getUserName() {
-		return userName;
+	public String getUserMobile() {
+		return userMobile;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserMobile(String userMobile) {
+		this.userMobile = userMobile;
 	}
 	public String getPassword() {
 		return password;

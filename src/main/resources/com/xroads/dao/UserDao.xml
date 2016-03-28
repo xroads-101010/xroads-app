@@ -29,7 +29,7 @@
       updated_at
     FROM
     `user` u 
-    WHERE u.user_name = #{userName} and u.password = #{password}
+    WHERE u.user_mobile = #{userMobile} and u.password = #{password}
   </select>
   
   <select id="readUserByEmail" parameterType="String" resultMap="userMap">
